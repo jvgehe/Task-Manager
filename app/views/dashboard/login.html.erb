@@ -1,0 +1,10 @@
+<h1 class="text-3xl text-center text-black font-bold mt-80 mb-20">TASK MANAGER</h1>
+
+<% if user_signed_in? %>
+  <div> Welcome <%= current_user.email %> </div>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete, :class => "btn-primary block mx-auto" %>
+<% else %>
+  <%= button_to "Sign in" , new_user_session_path, :class => "btn-primary block mx-auto" %>
+<% end %>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>

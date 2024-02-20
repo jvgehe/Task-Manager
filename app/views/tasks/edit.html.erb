@@ -1,0 +1,41 @@
+<h1>Edit Task</h1>
+
+<%= form_with(model: [current_user, @task]) do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+    <% current_user.errors.full_messages_for(:title).each do |message| %>
+      <div class="text-red-600"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+    <% current_user.errors.full_messages_for(:description).each do |message| %>
+      <div class="text-red-600"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :due_date %><br>
+    <%= form.date_select :due_date %>
+    <% current_user.errors.full_messages_for(:due_date).each do |message| %>
+      <div class="text-red-600"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :status %><br>
+    <%= form.select :status, @status.map { |t| [t]}, {}, class: "form-control" %>
+    <% current_user.errors.full_messages_for(:status).each do |message| %>
+      <div class="text-red-600"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit :class => "btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to "back to dashboard", root_path, :class => "btn-secondary" %>

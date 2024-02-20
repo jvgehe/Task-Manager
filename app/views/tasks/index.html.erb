@@ -1,0 +1,18 @@
+<h1>Tasks</h1>
+
+
+<ul>
+  <% current_user.tasks.each do |task| %>
+    <li class="task">
+      <%= task.title %><br>
+      <%= task.description %><br>
+      <%= task.due_date %>
+      <%= link_to "edit", edit_user_task_path(current_user.id, task.id), :class => "btn-primary mx-auto" %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "add new task", new_user_task_path(current_user.id), :class => "btn-primary mx-auto" %>
+<% if user_signed_in? %>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete, :class => "btn-primary block mx-auto" %>
+<% end %>

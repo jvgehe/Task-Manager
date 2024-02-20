@@ -1,0 +1,30 @@
+<h1>Hello <%= current_user.email %> </h1>
+
+<h2>My Tasks</h2>
+
+<ul>
+  <% current_user.tasks.each do |task| %>
+    <li class="task">
+      <div class="float-left">
+      <b><%= task.title %></b><br>
+      <%= task.description %><br>
+      Due date: <%= task.due_date.strftime("%m/%d/%Y") %>
+        <%= form_with(url: user_task_path(current_user.id, task.id), model:task ,method: :patch, local: true) do |f| %>
+          <%= f.select :status, @status.map { |t| [t]}, {prompt: if task.status?; task.status else "please select" end, class: 'some-css-class' }, onchange: 'this.form.requestSubmit()' %>
+        <% end %>
+      </div>
+      <div class="float-right">
+      <%= link_to "edit", edit_user_task_path(current_user.id, task.id), :class => "btn-primary mx-auto" %>
+      <%= link_to "delete", user_task_path(current_user.id, task.id), :class => "btn-secondary mx-auto text-white bg-red-700", data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    } %>
+      </div>
+      <br class="clear-both">
+    </li>
+  <% end %>
+</ul>
+<%= link_to "add new task", new_user_task_path(current_user.id), :class => "btn-primary mx-auto" %>
+<% if user_signed_in? %>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete, :class => "btn-primary block mx-auto" %>
+<% end %>
