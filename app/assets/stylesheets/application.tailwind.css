@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer components {
+  .btn-primary {
+    @apply py-2 px-4 bg-purple-600 text-white rounded-md my-3 cursor-pointer inline-block;
+  }
+
+  .btn-secondary {
+    @apply py-2 px-4 bg-gray-200 text-black rounded-md my-3 inline-block cursor-pointer;
+  }
+
+  h1 {
+    @apply text-3xl text-black font-bold mb-3 text-center;
+  }
+
+  h2 {
+    @apply text-2xl text-black font-bold mb-3;
+  }
+
+  .task {
+    @apply bg-gray-200 my-3 p-3;
+  }
+
+}
+
